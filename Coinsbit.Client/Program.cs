@@ -25,8 +25,10 @@ namespace Coinsbit.Client
 
             var client = serviceProvider.GetService<CoinsbitService>();
             Console.Write(@"text currency:");
-            var cur = Console.ReadLine();
-            var response = await client.GetAccountBalance(cur);
+            //var cur = Console.ReadLine();
+            //var response1 = await client.GetAccountBalance();
+            var response2 = await client.SendOrderRequest();
+
 
             Console.ReadKey();
         }

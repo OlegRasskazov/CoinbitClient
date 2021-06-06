@@ -2,7 +2,7 @@
 using Coinsbit.Client.Client.Models.Enums;
 using System.Text.Json.Serialization;
 
-namespace Coinsbit.Client.Client.Models
+namespace Coinsbit.Client.Client.Models.AccountBalance
 {
     public class AccountBalanceRequestModel : BaseRequestData
     {

@@ -1,5 +1,7 @@
 ﻿using Coinsbit.Client.Client.Models;
 using Coinsbit.Client.Client.Models.Abstract;
+using Coinsbit.Client.Client.Models.AccountBalance;
+using Coinsbit.Client.Client.Models.AccountOrder;
 using Coinsbit.Client.Client.Models.Converters;
 using System;
 using System.Collections.Generic;
@@ -23,14 +25,20 @@ namespace Coinsbit.Client.Client
         }
 
 
-        public async Task<AccountBalanceResponseModel> GetAccountBalance(string currency)
+        public async Task<AccountBalanceResponseModel> GetAccountBalance(string currency = "")
         {
             var request = GetRequest(new AccountBalanceRequestModel());
-            return await SendRequest<CoinsbitRequest<AccountBalanceRequestModel>, AccountBalanceResponseModel>(request);
+            return await SendRequest<CoinsbitRequest<AccountBalanceRequestModel>, AccountBalanceResponseModel>(request, CoinsbitServiceExtension.accountBalanceEndpoint);
+        }
+
+        public async Task<AccountOrderResponseModel> SendOrderRequest()
+        {
+            var request = GetRequest(new AccountOrderRequestModel { Limit = 100, Offset = 10, OrderId = 1234 });
+            return await SendRequest<CoinsbitRequest<AccountOrderRequestModel>, AccountOrderResponseModel>(request, CoinsbitServiceExtension.accountOrderEndpoint);
         }
 
 
-        private async Task<TResponse> SendRequest<TRequest, TResponse>(TRequest request)
+        private async Task<TResponse> SendRequest<TRequest, TResponse>(TRequest request, string endpoint)
         {
             var serializerOpt = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
             var requestData = JsonSerializer.Serialize(request, serializerOpt);
@@ -44,7 +52,7 @@ namespace Coinsbit.Client.Client
                 _client.DefaultRequestHeaders.Add("X-TXC-SIGNATURE", BitConverter.ToString(hash).ToLower().Replace("-", string.Empty));
             }
 
-            var response = await _client.PostAsync(CoinsbitServiceExtension.accountBalanceEndpoint, new StringContent(requestData));
+            var response = await _client.PostAsync(endpoint, new StringContent(requestData));
             var s = await response.Content.ReadAsStringAsync();
             Debug.WriteLine($"Response: {s}");
             serializerOpt.Converters.Add(new ResponseMessageConverter());

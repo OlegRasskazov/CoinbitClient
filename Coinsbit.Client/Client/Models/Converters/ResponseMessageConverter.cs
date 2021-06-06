@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Coinsbit.Client.Client.Models.Common;
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
