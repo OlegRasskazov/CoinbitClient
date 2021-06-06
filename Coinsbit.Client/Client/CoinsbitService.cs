@@ -12,11 +12,11 @@ using System.Threading.Tasks;
 
 namespace Coinsbit.Client.Client
 {
-    public class CoinbitService
+    public class CoinsbitService
     {
         private readonly HttpClient _client;
-        private readonly CoinbitServiceOption _options;
-        public CoinbitService(HttpClient client, CoinbitServiceOption options)
+        private readonly CoinsbitServiceOption _options;
+        public CoinsbitService(HttpClient client, CoinsbitServiceOption options)
         {
             _client = client;
             _options = options;
@@ -26,7 +26,7 @@ namespace Coinsbit.Client.Client
         public async Task<AccountBalanceResponseModel> GetAccountBalance(string currency)
         {
             var request = GetRequest(new AccountBalanceRequestModel());
-            return await SendRequest<CoinbitRequest<AccountBalanceRequestModel>, AccountBalanceResponseModel>(request);
+            return await SendRequest<CoinsbitRequest<AccountBalanceRequestModel>, AccountBalanceResponseModel>(request);
         }
 
 
@@ -44,13 +44,13 @@ namespace Coinsbit.Client.Client
                 _client.DefaultRequestHeaders.Add("X-TXC-SIGNATURE", BitConverter.ToString(hash).ToLower().Replace("-", string.Empty));
             }
 
-            var response = await _client.PostAsync(CoinbitServiceExtension.accountBalanceEndpoint, new StringContent(requestData));
+            var response = await _client.PostAsync(CoinsbitServiceExtension.accountBalanceEndpoint, new StringContent(requestData));
             var s = await response.Content.ReadAsStringAsync();
             Debug.WriteLine($"Response: {s}");
             serializerOpt.Converters.Add(new ResponseMessageConverter());
             return JsonSerializer.Deserialize<TResponse>(await response.Content.ReadAsStringAsync(), serializerOpt);
         }
-        private CoinbitRequest<T> GetRequest<T>(T data) where T : BaseRequestData => new CoinbitRequest<T>(data);
+        private CoinsbitRequest<T> GetRequest<T>(T data) where T : BaseRequestData => new CoinsbitRequest<T>(data);
 
     }
 }

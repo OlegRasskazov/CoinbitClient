@@ -14,16 +14,16 @@ namespace Coinsbit.Client
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .Build();
 
-            var options = configuration.GetSection(nameof(CoinbitServiceOption)).Get<CoinbitServiceOption>();
+            var options = configuration.GetSection(nameof(CoinsbitServiceOption)).Get<CoinsbitServiceOption>();
             var serviceProvider = new ServiceCollection()
                 .AddSingleton(options)
-                .AddHttpClient<CoinbitService>(client =>
+                .AddHttpClient<CoinsbitService>(client =>
             {
                 client.BaseAddress = new Uri(options.Url);
                 client.DefaultRequestHeaders.Add("X-TXC-APIKEY", options.Key);
             }).Services.BuildServiceProvider();
 
-            var client = serviceProvider.GetService<CoinbitService>();
+            var client = serviceProvider.GetService<CoinsbitService>();
             Console.Write(@"text currency:");
             var cur = Console.ReadLine();
             var response = await client.GetAccountBalance(cur);
