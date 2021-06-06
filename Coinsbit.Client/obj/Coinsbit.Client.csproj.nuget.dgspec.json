@@ -40,11 +40,7 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
-            "Microsoft.AspNetCore.Http.Abstractions": {
-              "target": "Package",
-              "version": "[2.2.0, )"
-            },
-            "Microsoft.Extensions.Configuration": {
+            "Microsoft.Extensions.Configuration.Binder": {
               "target": "Package",
               "version": "[5.0.0, )"
             },
@@ -61,6 +57,10 @@
               "version": "[5.0.0, )"
             },
             "Microsoft.Extensions.Http": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "Microsoft.Extensions.Options.ConfigurationExtensions": {
               "target": "Package",
               "version": "[5.0.0, )"
             }

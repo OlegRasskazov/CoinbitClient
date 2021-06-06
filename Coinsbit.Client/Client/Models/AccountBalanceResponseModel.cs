@@ -7,9 +7,8 @@ namespace Coinsbit.Client.Client.Models
     public class AccountBalanceResponseModel
     {
         public bool Success { get; set; }
-        [JsonPropertyName("message")]
         [JsonConverter(typeof(ResponseMessageConverter))]
-        public MessageType Messages { get; set; }
+        public MessageType Message { get; set; }
         public ResultType Result { get; set; }
     }
 

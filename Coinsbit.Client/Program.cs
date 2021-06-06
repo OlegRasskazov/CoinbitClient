@@ -1,5 +1,4 @@
 ﻿using Coinsbit.Client.Client;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -15,12 +14,13 @@ namespace Coinsbit.Client
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .Build();
 
-            var url = configuration[$"{nameof(CoinbitServiceOption)}:Url"];
+            var options = configuration.GetSection(nameof(CoinbitServiceOption)).Get<CoinbitServiceOption>();
             var serviceProvider = new ServiceCollection()
+                .AddSingleton(options)
                 .AddHttpClient<CoinbitService>(client =>
             {
-                client.BaseAddress = new Uri(url);
-                client.DefaultRequestHeaders.Add("X-TXC-APIKEY", "");
+                client.BaseAddress = new Uri(options.Url);
+                client.DefaultRequestHeaders.Add("X-TXC-APIKEY", options.Key);
             }).Services.BuildServiceProvider();
 
             var client = serviceProvider.GetService<CoinbitService>();
