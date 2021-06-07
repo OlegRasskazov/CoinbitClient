@@ -6,6 +6,5 @@ namespace Coinsbit.Client.Client.Models.AccountBalance
     {
         public string Available { get; set; }
         public string Freeze { get; set; }
-        public List<object> SomeResult { get; set; }
     }
 }

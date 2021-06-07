@@ -1,5 +1,7 @@
 ﻿using Coinsbit.Client.Client.Models.Common;
 using Coinsbit.Client.Client.Models.Converters;
+using Coinsbit.Client.Client.Models.Enums;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace Coinsbit.Client.Client.Models.AccountBalance
@@ -9,6 +11,6 @@ namespace Coinsbit.Client.Client.Models.AccountBalance
         public bool Success { get; set; }
         [JsonConverter(typeof(ResponseMessageConverter))]
         public MessageType Message { get; set; }
-        public ResultType Result { get; set; }
+        public IDictionary<CurrencyEnum, ResultType> Result { get; set; }
     }
 }

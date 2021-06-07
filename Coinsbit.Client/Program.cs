@@ -28,6 +28,8 @@ namespace Coinsbit.Client
             //var cur = Console.ReadLine();
             var response1 = await client.GetAccountBalance();
             //var response2 = await client.SendOrderRequest();
+            //var response3 = await client.SendOrderHistoryRequest();
+            //var response4 = await client.GetAccountBalances();
 
 
             Console.ReadKey();

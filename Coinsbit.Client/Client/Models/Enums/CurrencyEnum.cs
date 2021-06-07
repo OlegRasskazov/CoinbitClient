@@ -2,6 +2,7 @@
 {
     public enum CurrencyEnum
     {
-        ETH
+        ETH,
+        HMR
     }
 }

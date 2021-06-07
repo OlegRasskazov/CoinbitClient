@@ -7,6 +7,6 @@ namespace Coinsbit.Client.Client.Models.AccountBalance
     public class AccountBalanceRequestModel : BaseRequestData
     {
         [JsonConverter(typeof(JsonStringEnumConverter))]
-        public CurrencyEnum Currency { get; set; } = CurrencyEnum.ETH;
+        public CurrencyEnum Currency { get; set; } = CurrencyEnum.HMR;
     }
 }
