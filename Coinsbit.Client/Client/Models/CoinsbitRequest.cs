@@ -7,7 +7,7 @@ namespace Coinsbit.Client.Client.Models
     {
         public CoinsbitRequest(BaseRequestData data) => Request = (T)data;
 
-        public string Nonce { get => Math.Truncate(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds).ToString(); }
         public T Request { get; set; }
+        public string Nonce { get => Math.Truncate(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds).ToString(); }
     }
 }
